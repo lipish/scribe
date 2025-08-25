@@ -1,0 +1,136 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/Views/JupyterCellView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "执行单元格",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "执行单元格",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 361
+        }
+      },
+      {
+        "comment": "",
+        "key": "更改类型",
+        "location": {
+          "startingColumn": 14,
+          "startingLine": 367
+        }
+      },
+      {
+        "comment": "",
+        "key": "在上方插入单元格",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 377
+        }
+      },
+      {
+        "comment": "",
+        "key": "在下方插入单元格",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 381
+        }
+      },
+      {
+        "comment": "",
+        "key": "复制单元格",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 387
+        }
+      },
+      {
+        "comment": "",
+        "key": "删除单元格",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 391
+        }
+      },
+      {
+        "comment": "",
+        "key": "上移",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 210
+        }
+      },
+      {
+        "comment": "",
+        "key": "下移",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 215
+        }
+      },
+      {
+        "comment": "",
+        "key": "复制",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 220
+        }
+      },
+      {
+        "comment": "",
+        "key": "删除",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 226
+        }
+      },
+      {
+        "comment": "",
+        "key": "输出",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 310
+        }
+      },
+      {
+        "comment": "",
+        "key": "隐藏输出",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 323
+        }
+      },
+      {
+        "comment": "",
+        "key": "显示输出",
+        "location": {
+          "startingColumn": 56,
+          "startingLine": 323
+        }
+      },
+      {
+        "comment": "",
+        "key": "清除输出",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 331
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 638
+        }
+      }
+    ]
+  },
+  "version": 1
+}

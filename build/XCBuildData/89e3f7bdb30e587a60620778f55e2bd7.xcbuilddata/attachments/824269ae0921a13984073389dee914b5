@@ -1,0 +1,140 @@
+{
+  "" : {
+    "const-values" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.d",
+    "diagnostics" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.dia",
+    "emit-module-dependencies" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master-emit-module.dia",
+    "swift-dependencies" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.swiftdeps"
+  },
+  "/Users/xinference/github/scribe/Scribe/ContentView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Models/Persistence.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Persistence.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Persistence.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Persistence.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/ScribeApp.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeApp.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeApp.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeApp.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Services/AIService.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIService.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIService.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIService.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Services/DocumentExportService.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportService.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportService.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportService.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/ViewModels/DocumentViewModel.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentViewModel.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentViewModel.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentViewModel.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/DocumentExportView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentExportView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/DocumentManagementView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentManagementView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentManagementView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/DocumentManagementView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/ImportDocumentSheetView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/JupyterCellView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/JupyterCellView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/JupyterCellView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/JupyterCellView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/MarkdownPreviewView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/NewDocumentSheetView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/RichTextEditor.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/RichTextEditor.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/RichTextEditor.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/RichTextEditor.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/ScribeDocumentEditorView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/Settings/AISettingsView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AISettingsView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AISettingsView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AISettingsView.o"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/Settings/SettingsView.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/SettingsView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/SettingsView.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/SettingsView.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/AIResponse+CoreDataClass.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataClass.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/AIResponse+CoreDataProperties.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/AIResponse+CoreDataProperties.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Cell+CoreDataClass.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataClass.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Cell+CoreDataProperties.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Cell+CoreDataProperties.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Document+CoreDataClass.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Document+CoreDataProperties.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Scribe+CoreDataModel.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Tag+CoreDataClass.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Tag+CoreDataProperties.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.o"
+  },
+  "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Scribe.build/Release/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

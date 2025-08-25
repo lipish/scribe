@@ -8,6 +8,41 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+// 导出格式枚举
+enum ExportFormat: String, CaseIterable {
+    case pdf = "PDF"
+    case markdown = "Markdown"
+    case txt = "文本"
+    case html = "HTML"
+    
+    var fileExtension: String {
+        switch self {
+        case .pdf: return "pdf"
+        case .markdown: return "md"
+        case .txt: return "txt"
+        case .html: return "html"
+        }
+    }
+    
+    var utType: UTType {
+        switch self {
+        case .pdf: return .pdf
+        case .markdown: return UTType("net.daringfireball.markdown") ?? .plainText
+        case .txt: return .plainText
+        case .html: return .html
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .pdf: return "doc.richtext"
+        case .markdown: return "doc.text"
+        case .txt: return "doc.plaintext"
+        case .html: return "globe"
+        }
+    }
+}
+
 struct DocumentExportView: View {
     let document: Document
     @Environment(\.dismiss) private var dismiss
@@ -187,16 +222,16 @@ struct DocumentExportView: View {
     private func performExport(to url: URL) {
         isExporting = true
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        Task {
             do {
-                try exportService.exportDocument(document, format: selectedFormat, to: url)
+                try await exportService.exportDocument(document, format: selectedFormat, to: url)
                 
-                DispatchQueue.main.async {
+                await MainActor.run {
                     isExporting = false
                     exportSuccess = true
                 }
             } catch {
-                DispatchQueue.main.async {
+                await MainActor.run {
                     isExporting = false
                     exportError = error
                     showingErrorAlert = true
@@ -248,7 +283,7 @@ struct FormatOptionView: View {
             return "globe"
         case .markdown:
             return "text.alignleft"
-        case .plainText:
+        case .txt:
             return "doc.plaintext"
         }
     }
@@ -270,7 +305,7 @@ struct ExportDocument: FileDocument {
     
     init(configuration: ReadConfiguration) throws {
         self.content = ""
-        self.format = .plainText
+        self.format = .txt
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {

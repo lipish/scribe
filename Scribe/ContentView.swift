@@ -7,208 +7,498 @@
 
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var documentViewModel = DocumentViewModel()
-    @State private var selectedSidebarItem: SidebarItem? = .allDocuments
+    @State private var selectedDocument: Document?
+    @State private var showingNewDocumentSheet = false
+    @State private var showingImportSheet = false
+    @State private var searchText = ""
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
     
-    enum SidebarItem: String, CaseIterable, Identifiable {
-        case allDocuments = "所有文档"
-        case favorites = "收藏夹"
-        case recent = "最近使用"
-        case normal = "普通模式"
-        case jupyter = "Jupyter 模式"
-        
-        var id: String { rawValue }
-        
-        var icon: String {
-            switch self {
-            case .allDocuments:
-                return "doc.text.fill"
-            case .favorites:
-                return "heart.fill"
-            case .recent:
-                return "clock.fill"
-            case .normal:
-                return "doc.text"
-            case .jupyter:
-                return "terminal.fill"
-            }
-        }
+    var filteredDocuments: [Document] {
+        documentViewModel.searchText = searchText
+        return documentViewModel.filteredDocuments
     }
     
     var body: some View {
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
             // 侧边栏
-            SidebarView(selectedItem: $selectedSidebarItem, documentViewModel: documentViewModel)
+            SidebarView(
+                showingNewDocumentSheet: $showingNewDocumentSheet,
+                showingImportSheet: $showingImportSheet
+            )
+            .navigationSplitViewColumnWidth(min: 280, ideal: 320, max: 400)
         } content: {
             // 文档列表
-            DocumentListView(selectedSidebarItem: selectedSidebarItem, documentViewModel: documentViewModel)
+            DocumentListView(
+                documents: filteredDocuments,
+                selectedDocument: $selectedDocument,
+                searchText: $searchText,
+                documentViewModel: documentViewModel
+            )
+            .navigationSplitViewColumnWidth(min: 400, ideal: 500, max: 600)
         } detail: {
-            // 主编辑区域
-            if let selectedDocument = documentViewModel.selectedDocument {
-                DocumentEditorView(document: selectedDocument, documentViewModel: documentViewModel)
-            } else {
-                WelcomeView(documentViewModel: documentViewModel)
-            }
+            // 详情视图
+            DetailView(selectedDocument: selectedDocument, documentViewModel: documentViewModel)
+                .navigationSplitViewColumnWidth(min: 600, ideal: 800, max: 1200)
         }
-        .environmentObject(documentViewModel)
+        .sheet(isPresented: $showingNewDocumentSheet) {
+            NewDocumentSheetView(documentViewModel: documentViewModel)
+        }
+        .sheet(isPresented: $showingImportSheet) {
+            ImportDocumentSheetView(documentViewModel: documentViewModel)
+        }
         .onAppear {
-            documentViewModel.fetchDocuments()
+            documentViewModel.loadDocuments()
         }
     }
 }
 
-// MARK: - 侧边栏视图
+// MARK: - 侧边栏
 struct SidebarView: View {
-    @Binding var selectedItem: ContentView.SidebarItem?
-    @ObservedObject var documentViewModel: DocumentViewModel
-    @State private var showingAISettings = false
+    @Binding var showingNewDocumentSheet: Bool
+    @Binding var showingImportSheet: Bool
     
     var body: some View {
-        List(selection: $selectedItem) {
-            Section("文档") {
-                ForEach(ContentView.SidebarItem.allCases.prefix(3), id: \.id) { item in
-                    Label(item.rawValue, systemImage: item.icon)
-                        .tag(item)
-                }
+        VStack(spacing: 0) {
+            // 标题区域
+            HStack {
+                Image(systemName: "doc.text")
+                    .font(.title2)
+                    .foregroundColor(.accentColor)
+                Text("Scribe")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
             }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
             
-            Section("模式") {
-                ForEach(ContentView.SidebarItem.allCases.suffix(2), id: \.id) { item in
-                    Label(item.rawValue, systemImage: item.icon)
-                        .tag(item)
-                }
-            }
+            Divider()
             
-            Section("设置") {
+            // 操作按钮区域
+            VStack(spacing: 16) {
+                // 新建文档按钮
                 Button(action: {
-                    showingAISettings = true
+                    showingNewDocumentSheet = true
                 }) {
-                    Label("AI 设置", systemImage: "brain")
+                    HStack(spacing: 12) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                        Text("新建文档")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.accentColor)
+                    )
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                // 导入按钮组
+                VStack(spacing: 8) {
+                    Button(action: {
+                        showingImportSheet = true
+                    }) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "square.and.arrow.down")
+                                .font(.title3)
+                            Text("导入文件")
+                                .font(.subheadline)
+                            Spacer()
+                        }
                         .foregroundColor(.primary)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(.controlBackgroundColor))
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Button(action: {
+                        importFromClipboard()
+                    }) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "doc.on.clipboard")
+                                .font(.title3)
+                            Text("从剪贴板导入")
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .foregroundColor(.primary)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(.controlBackgroundColor))
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
-                .buttonStyle(.plain)
             }
-        }
-        .navigationTitle("Scribe")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    documentViewModel.createNewDocument()
-                }) {
-                    Image(systemName: "plus")
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
+            
+            Divider()
+            
+            // 导航区域
+            VStack(alignment: .leading, spacing: 8) {
+                NavigationLink(destination: EmptyView()) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "doc.text")
+                            .font(.title3)
+                        Text("所有文档")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .foregroundColor(.primary)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
                 }
+                .buttonStyle(PlainButtonStyle())
+                
+                NavigationLink(destination: EmptyView()) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "heart")
+                            .font(.title3)
+                        Text("收藏夹")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .foregroundColor(.primary)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                NavigationLink(destination: EmptyView()) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "clock")
+                            .font(.title3)
+                        Text("最近使用")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .foregroundColor(.primary)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
+            .padding(.vertical, 16)
+            
+            Spacer()
+            
+            Divider()
+            
+            // 设置区域
+            VStack(spacing: 8) {
+                NavigationLink(destination: EmptyView()) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "gearshape")
+                            .font(.title3)
+                        Text("设置")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .foregroundColor(.primary)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .padding(.vertical, 16)
         }
-        .sheet(isPresented: $showingAISettings) {
-            AISettingsView()
-        }
+        .background(Color(.controlBackgroundColor))
+    }
+    
+    private func importFromClipboard() {
+        // TODO: 实现剪贴板导入逻辑
+        print("从剪贴板导入功能待实现")
     }
 }
 
-// MARK: - 文档列表视图
+// MARK: - 文档列表
 struct DocumentListView: View {
-    let selectedSidebarItem: ContentView.SidebarItem?
-    @ObservedObject var documentViewModel: DocumentViewModel
+    let documents: [Document]
+    @Binding var selectedDocument: Document?
+    @Binding var searchText: String
+    let documentViewModel: DocumentViewModel
     
     var body: some View {
-        DocumentManagementView(documentViewModel: documentViewModel)
-            .navigationTitle(selectedSidebarItem?.rawValue ?? "文档")
+        VStack(spacing: 0) {
+            // 搜索栏
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                TextField("搜索文档...", text: $searchText)
+                    .textFieldStyle(PlainTextFieldStyle())
+                if !searchText.isEmpty {
+                    Button(action: {
+                        searchText = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(.controlBackgroundColor))
+            )
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            
+            Divider()
+            
+            // 文档列表
+            if documents.isEmpty {
+                EmptyStateView()
+            } else {
+                List(documents, id: \.id, selection: $selectedDocument) { document in
+                    DocumentRowView(document: document, documentViewModel: documentViewModel)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+                        .listRowSeparator(.hidden)
+                }
+                .listStyle(PlainListStyle())
+            }
+        }
+        .navigationTitle("文档")
     }
 }
 
 // MARK: - 文档行视图
 struct DocumentRowView: View {
     let document: Document
-    @ObservedObject var documentViewModel: DocumentViewModel
+    let documentViewModel: DocumentViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(document.title ?? "无标题")
-                    .font(.headline)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text((document.title?.isEmpty ?? true) ? "无标题" : (document.title ?? ""))
+                        .font(.headline)
+                        .lineLimit(1)
+                    
+                    if !(document.content?.isEmpty ?? true) {
+                        Text(document.content ?? "")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
+                    
+                    HStack {
+                        Text(document.updatedAt ?? Date(), style: .relative)
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        if document.isFavorite {
+                            Image(systemName: "heart.fill")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        }
+                        
+                        Text(document.mode == "jupyter" ? "Jupyter" : "普通")
+                            .font(.caption2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(document.mode == "jupyter" ? Color.orange.opacity(0.2) : Color.blue.opacity(0.2))
+                            )
+                            .foregroundColor(document.mode == "jupyter" ? .orange : .blue)
+                    }
+                }
                 
                 Spacer()
                 
-                if document.isFavorite {
-                    Image(systemName: "heart.fill")
-                        .foregroundColor(.red)
-                        .font(.caption)
+                Button(action: {
+                    toggleFavorite()
+                }) {
+                    Image(systemName: document.isFavorite ? "heart.fill" : "heart")
+                        .font(.title3)
+                        .foregroundColor(document.isFavorite ? .red : .secondary)
                 }
-                
-                Image(systemName: document.mode == "jupyter" ? "terminal" : "doc.text")
-                    .foregroundColor(.secondary)
-                    .font(.caption)
+                .buttonStyle(PlainButtonStyle())
             }
-            
-            Text(document.content?.prefix(100) ?? "")
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .lineLimit(2)
-            
-            Text(document.updatedAt?.formatted(date: .abbreviated, time: .shortened) ?? "")
-                .font(.caption2)
-                .foregroundColor(.secondary)
         }
-        .padding(.vertical, 2)
-        .contentShape(Rectangle())
-        .onTapGesture {
-            documentViewModel.selectDocument(document)
-        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(.controlBackgroundColor))
+        )
         .contextMenu {
-            Button(document.isFavorite ? "取消收藏" : "添加收藏") {
-                documentViewModel.toggleFavorite(document)
+            Button(action: {
+                toggleFavorite()
+            }) {
+                Label(document.isFavorite ? "取消收藏" : "添加到收藏", systemImage: document.isFavorite ? "heart.slash" : "heart")
             }
             
-            Divider()
-            
-            Button("删除", role: .destructive) {
-                documentViewModel.deleteDocument(document)
+            Button(action: {
+                deleteDocument()
+            }) {
+                Label("删除", systemImage: "trash")
             }
+        }
+    }
+    
+    private func toggleFavorite() {
+        documentViewModel.toggleFavorite(document)
+    }
+    
+    private func deleteDocument() {
+        documentViewModel.deleteDocument(document)
+    }
+}
+
+// MARK: - 空状态视图
+struct EmptyStateView: View {
+    var body: some View {
+        VStack(spacing: 24) {
+            Image(systemName: "doc.text")
+                .font(.system(size: 64))
+                .foregroundColor(.secondary)
+            
+            VStack(spacing: 8) {
+                Text("还没有文档")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                Text("创建您的第一个文档开始使用 Scribe")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.controlBackgroundColor).opacity(0.3))
+    }
+}
+
+// MARK: - 详情视图
+struct DetailView: View {
+    let selectedDocument: Document?
+    let documentViewModel: DocumentViewModel
+    
+    var body: some View {
+        if let document = selectedDocument {
+            ScribeDocumentEditorView(document: document, documentViewModel: documentViewModel)
+                .navigationTitle((document.title?.isEmpty ?? true) ? "无标题" : (document.title ?? ""))
+        } else {
+            WelcomeView()
         }
     }
 }
 
 // MARK: - 欢迎视图
 struct WelcomeView: View {
-    @ObservedObject var documentViewModel: DocumentViewModel
-    
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "doc.text.fill")
-                .font(.system(size: 60))
-                .foregroundColor(.accentColor)
-            
-            Text("欢迎使用 Scribe")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            Text("智能笔记应用，支持普通模式和 Jupyter AI 模式")
-                .font(.title3)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            
-            HStack(spacing: 16) {
-                Button("创建普通笔记") {
-                    documentViewModel.createNewDocument(mode: DocumentViewModel.DocumentMode.normal)
-                }
-                .buttonStyle(.borderedProminent)
+        VStack(spacing: 32) {
+            VStack(spacing: 16) {
+                Image(systemName: "doc.text")
+                    .font(.system(size: 80))
+                    .foregroundColor(.accentColor)
                 
-                Button("创建 Jupyter 笔记") {
-                    documentViewModel.createNewDocument(mode: DocumentViewModel.DocumentMode.jupyter)
+                VStack(spacing: 8) {
+                    Text("欢迎使用 Scribe")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
+                    Text("强大的文档编辑和管理工具")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
                 }
-                .buttonStyle(.bordered)
             }
+            
+            VStack(spacing: 16) {
+                FeatureCard(
+                    icon: "doc.text",
+                    title: "智能编辑",
+                    description: "支持 Markdown 和富文本编辑",
+                    color: .blue
+                )
+                
+                FeatureCard(
+                    icon: "brain.head.profile",
+                    title: "AI 助手",
+                    description: "集成 AI 功能，提升写作效率",
+                    color: .purple
+                )
+                
+                FeatureCard(
+                    icon: "square.grid.3x3",
+                    title: "Jupyter 支持",
+                    description: "支持 Jupyter 笔记本格式",
+                    color: .orange
+                )
+            }
+            .frame(maxWidth: 400)
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.controlBackgroundColor).opacity(0.3))
     }
 }
 
-// DocumentEditorView 已移动到单独的文件
+// MARK: - 功能卡片
+struct FeatureCard: View {
+    let icon: String
+    let title: String
+    let description: String
+    let color: Color
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+                .frame(width: 40, height: 40)
+                .background(
+                    Circle()
+                        .fill(color.opacity(0.1))
+                )
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                
+                Text(description)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.controlBackgroundColor))
+                .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+        )
+    }
+}
+
+
+
+
+
+
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

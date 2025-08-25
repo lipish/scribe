@@ -1,0 +1,16 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/Views/MarkdownPreviewView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 74
+        }
+      }
+    ]
+  },
+  "version": 1
+}

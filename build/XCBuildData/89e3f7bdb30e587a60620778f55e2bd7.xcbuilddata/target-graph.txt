@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'Scribe' in project 'Scribe' (no dependencies)

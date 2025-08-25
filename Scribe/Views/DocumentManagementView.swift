@@ -383,7 +383,7 @@ struct NewDocumentSheet: View {
     @ObservedObject var documentViewModel: DocumentViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var title = ""
-    @State private var selectedMode: DocumentViewModel.DocumentMode = .normal
+    @State private var selectedMode: String = "normal"
     
     var body: some View {
         NavigationView {
@@ -392,16 +392,13 @@ struct NewDocumentSheet: View {
                     TextField("标题", text: $title)
                     
                     Picker("模式", selection: $selectedMode) {
-                        ForEach([DocumentViewModel.DocumentMode.normal, DocumentViewModel.DocumentMode.jupyter], id: \.rawValue) { mode in
-                            Label(mode.displayName, systemImage: mode.icon)
-                                .tag(mode)
-                        }
+                        Text("普通文档").tag("normal")
+                        Text("Jupyter 笔记").tag("jupyter")
                     }
                     .pickerStyle(.segmented)
                 }
             }
             .navigationTitle("新建文档")
-            // .navigationBarTitleDisplayMode(.inline) // macOS 不支持
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("取消") {
@@ -412,7 +409,7 @@ struct NewDocumentSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("创建") {
                         let documentTitle = title.isEmpty ? "新建文档" : title
-                        documentViewModel.createNewDocument(title: documentTitle, mode: selectedMode)
+                        documentViewModel.createDocument(title: documentTitle, mode: selectedMode)
                         dismiss()
                     }
                 }

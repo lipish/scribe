@@ -6,335 +6,365 @@
 //
 
 import Foundation
-import CoreData
-import Combine
 import SwiftUI
+import AppKit
+import CoreData
 
+// 文档视图模型
 class DocumentViewModel: ObservableObject {
     @Published var documents: [Document] = []
     @Published var selectedDocument: Document?
-    @Published var searchText = ""
-    @Published var selectedMode: DocumentMode = .normal
-    @Published var isLoading = false
-    @Published var errorMessage: String?
+    @Published var searchText: String = ""
+    @Published var sortOrder: SortOrder = .dateModified
+    @Published var viewMode: ViewMode = .list
     
-    private let persistenceController: PersistenceController
-    private var cancellables = Set<AnyCancellable>()
+    private var viewContext: NSManagedObjectContext?
     
-    enum DocumentMode: String, CaseIterable {
-        case normal = "normal"
-        case jupyter = "jupyter"
-        
-        var displayName: String {
-            switch self {
-            case .normal:
-                return "普通模式"
-            case .jupyter:
-                return "Jupyter 模式"
-            }
-        }
-        
-        var icon: String {
-            switch self {
-            case .normal:
-                return "doc.text"
-            case .jupyter:
-                return "terminal"
-            }
-        }
+    enum SortOrder {
+        case dateModified
+        case dateCreated
+        case title
+        case mode
     }
     
-    init(persistenceController: PersistenceController = .shared) {
-        self.persistenceController = persistenceController
-        setupSearchSubscription()
-        fetchDocuments()
+    enum ViewMode {
+        case list
+        case grid
     }
     
-    // MARK: - 文档管理
+    init(context: NSManagedObjectContext? = nil) {
+        self.viewContext = context
+        loadDocuments()
+    }
     
-    func fetchDocuments() {
+    func loadDocuments() {
+        guard let context = viewContext else { return }
+        
         let request: NSFetchRequest<Document> = Document.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Document.updatedAt, ascending: false)]
         
         do {
-            documents = try persistenceController.container.viewContext.fetch(request)
+            documents = try context.fetch(request)
         } catch {
-            errorMessage = "获取文档失败: \(error.localizedDescription)"
+            print("加载文档失败: \(error)")
+            documents = []
         }
     }
     
-    func createNewDocument(title: String = "新建文档", mode: DocumentMode = .normal) {
-        let document = persistenceController.createDocument(title: title, mode: mode.rawValue)
-        documents.insert(document, at: 0)
-        selectedDocument = document
+    func createDocument(mode: String = "normal") {
+        guard let context = viewContext else { return }
         
-        // 如果是 Jupyter 模式，创建一个默认的单元格
-        if mode == .jupyter {
-            createDefaultCell(for: document)
+        let title = mode == "jupyter" ? "新建 Jupyter 笔记" : "新建文档"
+        let newDocument = Document(context: context)
+        newDocument.id = UUID()
+        newDocument.title = title
+        newDocument.content = ""
+        newDocument.mode = mode
+        newDocument.createdAt = Date()
+        newDocument.updatedAt = Date()
+        newDocument.isFavorite = false
+        
+        do {
+            try context.save()
+            loadDocuments()
+            selectedDocument = newDocument
+        } catch {
+            print("创建文档失败: \(error)")
         }
     }
     
-    private func createDefaultCell(for document: Document) {
-        let context = persistenceController.container.viewContext
-        let cell = Cell(context: context)
-        cell.id = UUID()
-        cell.cellType = "code"
-        cell.input = ""
-        cell.output = ""
-        cell.orderIndex = 0
-        cell.createdAt = Date()
-        cell.updatedAt = Date()
-        cell.document = document
-        persistenceController.save()
+    func createDocument() {
+        createDocument(mode: "normal")
+    }
+    
+    func createDocument(title: String, mode: String) {
+        guard let context = viewContext else { return }
+        
+        let newDocument = Document(context: context)
+        newDocument.id = UUID()
+        newDocument.title = title
+        newDocument.content = ""
+        newDocument.mode = mode
+        newDocument.createdAt = Date()
+        newDocument.updatedAt = Date()
+        newDocument.isFavorite = false
+        
+        do {
+            try context.save()
+            loadDocuments()
+            selectedDocument = newDocument
+        } catch {
+            print("创建文档失败: \(error)")
+        }
+    }
+    
+    func importFromClipboard() {
+        guard let context = viewContext else { return }
+        
+        let pasteboard = NSPasteboard.general
+        if let content = pasteboard.string(forType: .string), !content.isEmpty {
+            let newDocument = Document(context: context)
+            newDocument.id = UUID()
+            newDocument.title = "从剪贴板导入"
+            newDocument.content = content
+            newDocument.mode = "normal"
+            newDocument.createdAt = Date()
+            newDocument.updatedAt = Date()
+            newDocument.isFavorite = false
+            
+            do {
+                try context.save()
+                loadDocuments()
+                selectedDocument = newDocument
+            } catch {
+                print("导入剪贴板内容失败: \(error)")
+            }
+        }
+    }
+    
+    func importFromFile(url: URL) {
+        guard let context = viewContext else { return }
+        
+        do {
+            let content = try String(contentsOf: url)
+            let title = url.deletingPathExtension().lastPathComponent
+            let mode = url.pathExtension.lowercased() == "ipynb" ? "jupyter" : "normal"
+            
+            let newDocument = Document(context: context)
+            newDocument.id = UUID()
+            newDocument.title = title
+            newDocument.content = content
+            newDocument.mode = mode
+            newDocument.createdAt = Date()
+            newDocument.updatedAt = Date()
+            newDocument.isFavorite = false
+            
+            try context.save()
+            loadDocuments()
+            selectedDocument = newDocument
+        } catch {
+            print("导入文件失败: \(error)")
+        }
     }
     
     func deleteDocument(_ document: Document) {
-        persistenceController.deleteDocument(document)
-        documents.removeAll { $0.id == document.id }
+        guard let context = viewContext else { return }
         
-        if selectedDocument?.id == document.id {
-            selectedDocument = documents.first
+        context.delete(document)
+        
+        do {
+            try context.save()
+            loadDocuments()
+            if selectedDocument?.objectID == document.objectID {
+                selectedDocument = documents.first
+            }
+        } catch {
+            print("删除文档失败: \(error)")
         }
-    }
-    
-    func updateDocument(_ document: Document, title: String? = nil, content: String? = nil) {
-        if let title = title {
-            document.title = title
-        }
-        if let content = content {
-            document.content = content
-        }
-        document.updatedAt = Date()
-        persistenceController.save()
     }
     
     func toggleFavorite(_ document: Document) {
+        guard let context = viewContext else { return }
+        
         document.isFavorite.toggle()
         document.updatedAt = Date()
-        persistenceController.save()
-    }
-    
-    func switchDocumentMode(_ document: Document, to mode: DocumentMode) {
-        document.mode = mode.rawValue
-        document.updatedAt = Date()
-        persistenceController.save()
-        selectedMode = mode
-    }
-    
-    // MARK: - 搜索功能
-    
-    private func setupSearchSubscription() {
-        $searchText
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .sink { [weak self] searchText in
-                self?.performSearch(searchText)
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func performSearch(_ searchText: String) {
-        let request: NSFetchRequest<Document> = Document.fetchRequest()
-        
-        if searchText.isEmpty {
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \Document.updatedAt, ascending: false)]
-        } else {
-            request.predicate = NSPredicate(format: "title CONTAINS[cd] %@ OR content CONTAINS[cd] %@", searchText, searchText)
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \Document.updatedAt, ascending: false)]
-        }
         
         do {
-            documents = try persistenceController.container.viewContext.fetch(request)
+            try context.save()
+            loadDocuments()
         } catch {
-            errorMessage = "搜索失败: \(error.localizedDescription)"
+            print("更新收藏状态失败: \(error)")
         }
     }
     
-    // MARK: - 文档选择
+    func updateDocument(_ document: Document) {
+        guard let context = viewContext else { return }
+        
+        document.updatedAt = Date()
+        
+        do {
+            try context.save()
+            loadDocuments()
+        } catch {
+            print("更新文档失败: \(error)")
+        }
+    }
     
     func selectDocument(_ document: Document) {
         selectedDocument = document
-        selectedMode = DocumentMode(rawValue: document.mode ?? "normal") ?? .normal
     }
     
-    // MARK: - 过滤功能
-    
-    var filteredDocuments: [Document] {
-        if searchText.isEmpty {
-            return documents
-        } else {
-            return documents.filter { document in
-                document.title?.localizedCaseInsensitiveContains(searchText) == true ||
-                document.content?.localizedCaseInsensitiveContains(searchText) == true
-            }
-        }
-    }
-    
-    var favoriteDocuments: [Document] {
-        return documents.filter { $0.isFavorite }
-    }
-    
-    var recentDocuments: [Document] {
-        return Array(documents.prefix(5))
-    }
-}
-
-// MARK: - 文档统计
-extension DocumentViewModel {
-    var totalDocuments: Int {
-        documents.count
-    }
-    
-    var favoriteCount: Int {
-        favoriteDocuments.count
-    }
-    
-    var normalModeCount: Int {
-        documents.filter { $0.mode == "normal" }.count
-    }
-    
-    var jupyterModeCount: Int {
-        documents.filter { $0.mode == "jupyter" }.count
-    }
-}
-
-// MARK: - Jupyter 单元格管理
-extension DocumentViewModel {
-    
-    func getCells(for document: Document) -> [Cell] {
-        let request: NSFetchRequest<Cell> = Cell.fetchRequest()
-        request.predicate = NSPredicate(format: "document == %@", document)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Cell.orderIndex, ascending: true)]
-        
-        do {
-            return try persistenceController.container.viewContext.fetch(request)
-        } catch {
-            errorMessage = "获取单元格失败: \(error.localizedDescription)"
-            return []
-        }
-    }
-    
-    func addCell(to document: Document, type: String = "code", at index: Int? = nil) {
-        let context = persistenceController.container.viewContext
-        let cell = Cell(context: context)
-        cell.id = UUID()
-        cell.cellType = type
-        cell.input = ""
-        cell.output = ""
-        cell.createdAt = Date()
-        cell.updatedAt = Date()
-        cell.document = document
-        
-        let cells = getCells(for: document)
-        if let index = index {
-            cell.orderIndex = Int32(index)
-            // 更新后续单元格的顺序
-            for (i, existingCell) in cells.enumerated() {
-                if i >= index {
-                    existingCell.orderIndex = Int32(i + 1)
-                }
-            }
-        } else {
-            cell.orderIndex = Int32(cells.count)
-        }
-        
-        persistenceController.save()
-    }
-    
-    func deleteCell(_ cell: Cell) {
-        guard let document = cell.document else { return }
-        let context = persistenceController.container.viewContext
-        
-        // 获取要删除的单元格的顺序
-        let deletedOrder = cell.orderIndex
-        
-        // 删除单元格
-        context.delete(cell)
-        
-        // 更新后续单元格的顺序
-        let cells = getCells(for: document)
-        for existingCell in cells {
-            if existingCell.orderIndex > deletedOrder {
-                existingCell.orderIndex -= 1
-            }
-        }
-        
-        persistenceController.save()
-    }
+    // MARK: - Cell Management
     
     func moveCellUp(_ cell: Cell) {
-        guard let document = cell.document, cell.orderIndex > 0 else { return }
+        guard let document = cell.document else { return }
+        let cells = document.cells?.allObjects as? [Cell] ?? []
+        let sortedCells = cells.sorted { $0.orderIndex < $1.orderIndex }
         
-        let cells = getCells(for: document)
-        if let previousCell = cells.first(where: { $0.orderIndex == cell.orderIndex - 1 }) {
-            let tempOrder = cell.orderIndex
+        if let currentIndex = sortedCells.firstIndex(of: cell), currentIndex > 0 {
+            let previousCell = sortedCells[currentIndex - 1]
+            let tempIndex = cell.orderIndex
             cell.orderIndex = previousCell.orderIndex
-            previousCell.orderIndex = tempOrder
-            persistenceController.save()
+            previousCell.orderIndex = tempIndex
+            saveContext()
         }
     }
     
     func moveCellDown(_ cell: Cell) {
         guard let document = cell.document else { return }
+        let cells = document.cells?.allObjects as? [Cell] ?? []
+        let sortedCells = cells.sorted { $0.orderIndex < $1.orderIndex }
         
-        let cells = getCells(for: document)
-        if let nextCell = cells.first(where: { $0.orderIndex == cell.orderIndex + 1 }) {
-            let tempOrder = cell.orderIndex
+        if let currentIndex = sortedCells.firstIndex(of: cell), currentIndex < sortedCells.count - 1 {
+            let nextCell = sortedCells[currentIndex + 1]
+            let tempIndex = cell.orderIndex
             cell.orderIndex = nextCell.orderIndex
-            nextCell.orderIndex = tempOrder
-            persistenceController.save()
+            nextCell.orderIndex = tempIndex
+            saveContext()
         }
     }
     
     func duplicateCell(_ cell: Cell) {
-        guard let document = cell.document else { return }
+        guard let context = viewContext else { return }
         
-        let context = persistenceController.container.viewContext
         let newCell = Cell(context: context)
         newCell.id = UUID()
         newCell.cellType = cell.cellType
         newCell.input = cell.input
-        newCell.output = ""
+        newCell.output = cell.output
+        newCell.orderIndex = cell.orderIndex + 1
         newCell.createdAt = Date()
         newCell.updatedAt = Date()
-        newCell.document = document
+        newCell.document = cell.document
         
-        // 在原单元格后面插入
-        let cells = getCells(for: document)
-        newCell.orderIndex = cell.orderIndex + 1
-        
-        // 更新后续单元格的顺序
-        for existingCell in cells {
-            if existingCell.orderIndex > cell.orderIndex {
-                existingCell.orderIndex += 1
+        // Update order indices for cells below
+        if let document = cell.document {
+            let cells = document.cells?.allObjects as? [Cell] ?? []
+            for existingCell in cells {
+                if existingCell.orderIndex > cell.orderIndex {
+                    existingCell.orderIndex += 1
+                }
             }
         }
         
-        persistenceController.save()
+        saveContext()
+    }
+    
+    func deleteCell(_ cell: Cell) {
+        guard let context = viewContext else { return }
+        
+        let orderIndex = cell.orderIndex
+        let document = cell.document
+        
+        context.delete(cell)
+        
+        // Update order indices for cells below
+        if let document = document {
+            let cells = document.cells?.allObjects as? [Cell] ?? []
+            for existingCell in cells {
+                if existingCell.orderIndex > orderIndex {
+                    existingCell.orderIndex -= 1
+                }
+            }
+        }
+        
+        saveContext()
     }
     
     func insertCellAbove(_ cell: Cell) {
-        guard let document = cell.document else { return }
-        addCell(to: document, type: "code", at: Int(cell.orderIndex))
+        guard let context = viewContext else { return }
+        
+        let newCell = Cell(context: context)
+        newCell.id = UUID()
+        newCell.cellType = "code"
+        newCell.input = ""
+        newCell.output = ""
+        newCell.orderIndex = cell.orderIndex
+        newCell.createdAt = Date()
+        newCell.updatedAt = Date()
+        newCell.document = cell.document
+        
+        // Update order indices for this cell and cells below
+        if let document = cell.document {
+            let cells = document.cells?.allObjects as? [Cell] ?? []
+            for existingCell in cells {
+                if existingCell.orderIndex >= cell.orderIndex {
+                    existingCell.orderIndex += 1
+                }
+            }
+        }
+        
+        saveContext()
     }
     
     func insertCellBelow(_ cell: Cell) {
-        guard let document = cell.document else { return }
-        addCell(to: document, type: "code", at: Int(cell.orderIndex + 1))
-    }
-    
-    func updateCellContent(_ cell: Cell, content: String) {
-        cell.input = content
-        cell.updatedAt = Date()
-        persistenceController.save()
-    }
-    
-    func updateCellOutput(_ cell: Cell, output: String) {
-        cell.output = output
-        cell.updatedAt = Date()
-        persistenceController.save()
+        guard let context = viewContext else { return }
+        
+        let newCell = Cell(context: context)
+        newCell.id = UUID()
+        newCell.cellType = "code"
+        newCell.input = ""
+        newCell.output = ""
+        newCell.orderIndex = cell.orderIndex + 1
+        newCell.createdAt = Date()
+        newCell.updatedAt = Date()
+        newCell.document = cell.document
+        
+        // Update order indices for cells below
+        if let document = cell.document {
+            let cells = document.cells?.allObjects as? [Cell] ?? []
+            for existingCell in cells {
+                if existingCell.orderIndex > cell.orderIndex {
+                    existingCell.orderIndex += 1
+                }
+            }
+        }
+        
+        saveContext()
     }
     
     func saveContext() {
-        persistenceController.save()
+        guard let context = viewContext else { return }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save context: \(error)")
+        }
+    }
+    
+    func updateDocumentContent(_ document: Document, title: String, content: String) {
+        guard let context = viewContext else { return }
+        
+        document.title = title
+        document.content = content
+        document.updatedAt = Date()
+        
+        do {
+            try context.save()
+            loadDocuments()
+        } catch {
+            print("更新文档失败: \(error)")
+        }
+    }
+    
+    var filteredDocuments: [Document] {
+        let filtered = searchText.isEmpty ? documents : documents.filter {
+            $0.title?.localizedCaseInsensitiveContains(searchText) == true ||
+            $0.content?.localizedCaseInsensitiveContains(searchText) == true
+        }
+        
+        return filtered.sorted { doc1, doc2 in
+            switch sortOrder {
+            case .dateModified:
+                return (doc1.updatedAt ?? Date.distantPast) > (doc2.updatedAt ?? Date.distantPast)
+            case .dateCreated:
+                return (doc1.createdAt ?? Date.distantPast) > (doc2.createdAt ?? Date.distantPast)
+            case .title:
+                return (doc1.title ?? "") < (doc2.title ?? "")
+            case .mode:
+                return (doc1.mode ?? "normal") < (doc2.mode ?? "normal")
+            }
+        }
     }
 }

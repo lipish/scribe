@@ -8,7 +8,26 @@
 import SwiftUI
 import CoreData
 
+// MARK: - Markdown Element (临时定义)
+struct MarkdownElement: Identifiable {
+    let id = UUID()
+    let type: MarkdownElementType
+    let content: String
+    
+    init(type: MarkdownElementType, content: String) {
+        self.type = type
+        self.content = content
+    }
+}
 
+enum MarkdownElementType {
+    case heading1
+    case heading2
+    case heading3
+    case bulletPoint
+    case codeBlock
+    case paragraph
+}
 
 // MARK: - 单元格类型枚举
 enum CellType: String, CaseIterable {
