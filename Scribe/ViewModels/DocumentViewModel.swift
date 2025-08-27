@@ -348,6 +348,22 @@ class DocumentViewModel: ObservableObject {
         }
     }
     
+    func updateDocumentWithDetails(_ document: Document, title: String, content: String, mode: String) {
+        guard let context = viewContext else { return }
+        
+        document.title = title
+        document.content = content
+        document.mode = mode
+        document.updatedAt = Date()
+        
+        do {
+            try context.save()
+            loadDocuments()
+        } catch {
+            print("更新文档失败: \(error)")
+        }
+    }
+    
     var filteredDocuments: [Document] {
         let filtered = searchText.isEmpty ? documents : documents.filter {
             $0.title?.localizedCaseInsensitiveContains(searchText) == true ||

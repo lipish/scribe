@@ -19,7 +19,7 @@ struct ScribeApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .windowToolbarStyle(.unified)
-        .defaultSize(width: 1200, height: 800)
+        .defaultSize(width: 1000, height: 750)
         .defaultPosition(.center)
         
         Settings {

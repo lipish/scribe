@@ -12,74 +12,58 @@ import UniformTypeIdentifiers
 struct ContentView: View {
     @StateObject private var documentViewModel = DocumentViewModel()
     @State private var selectedDocument: Document?
-    @State private var showingNewDocumentSheet = false
-    @State private var showingImportSheet = false
-    @State private var searchText = ""
-    @State private var columnVisibility = NavigationSplitViewVisibility.all
     
-    var filteredDocuments: [Document] {
-        documentViewModel.searchText = searchText
-        return documentViewModel.filteredDocuments
-    }
+
     
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
-            // 侧边栏
+        NavigationSplitView {
             SidebarView(
-                showingNewDocumentSheet: $showingNewDocumentSheet,
-                showingImportSheet: $showingImportSheet
+                documentViewModel: documentViewModel,
+                selectedDocument: $selectedDocument
             )
-            .navigationSplitViewColumnWidth(min: 280, ideal: 320, max: 400)
-        } content: {
-            // 文档列表
-            DocumentListView(
-                documents: filteredDocuments,
+            .frame(minWidth: 250, idealWidth: 300, maxWidth: 400)
+        } detail: {
+            DocumentWaterfallView(
+                documents: documentViewModel.documents,
                 selectedDocument: $selectedDocument,
-                searchText: $searchText,
+                searchText: $documentViewModel.searchText,
                 documentViewModel: documentViewModel
             )
-            .navigationSplitViewColumnWidth(min: 400, ideal: 500, max: 600)
-        } detail: {
-            // 详情视图
-            DetailView(selectedDocument: selectedDocument, documentViewModel: documentViewModel)
-                .navigationSplitViewColumnWidth(min: 600, ideal: 800, max: 1200)
-        }
-        .sheet(isPresented: $showingNewDocumentSheet) {
-            NewDocumentSheetView(documentViewModel: documentViewModel)
-        }
-        .sheet(isPresented: $showingImportSheet) {
-            ImportDocumentSheetView(documentViewModel: documentViewModel)
+            .frame(minWidth: 400)
         }
         .onAppear {
             documentViewModel.loadDocuments()
+        }
+        .sheet(item: $selectedDocument) { document in
+            DetailView(selectedDocument: document, documentViewModel: documentViewModel)
+                .frame(minWidth: 800, minHeight: 600)
         }
     }
 }
 
 // MARK: - 侧边栏
 struct SidebarView: View {
-    @Binding var showingNewDocumentSheet: Bool
-    @Binding var showingImportSheet: Bool
+    let documentViewModel: DocumentViewModel
+    @Binding var selectedDocument: Document?
+    @State private var showingNewDocumentSheet = false
+    @State private var showingImportSheet = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            // 标题区域
-            HStack {
-                Image(systemName: "doc.text")
-                    .font(.title2)
-                    .foregroundColor(.accentColor)
-                Text("Scribe")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
-            
-            Divider()
-            
-            // 操作按钮区域
-            VStack(spacing: 16) {
+        ScrollView {
+            VStack(spacing: 24) {
+                // 标题区域
+                HStack {
+                    Image(systemName: "doc.text")
+                        .font(.title2)
+                        .foregroundColor(.accentColor)
+                    Text("Scribe")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
                 // 新建文档按钮
                 Button(action: {
                     showingNewDocumentSheet = true
@@ -100,268 +84,339 @@ struct SidebarView: View {
                     )
                 }
                 .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 16)
                 
-                // 导入按钮组
-                VStack(spacing: 8) {
-                    Button(action: {
-                        showingImportSheet = true
-                    }) {
-                        HStack(spacing: 12) {
-                            Image(systemName: "square.and.arrow.down")
-                                .font(.title3)
-                            Text("导入文件")
-                                .font(.subheadline)
-                            Spacer()
-                        }
-                        .foregroundColor(.primary)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(.controlBackgroundColor))
-                        )
+                // Folders 分组
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Folders")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
+                        Spacer()
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 20)
                     
-                    Button(action: {
-                        importFromClipboard()
-                    }) {
-                        HStack(spacing: 12) {
-                            Image(systemName: "doc.on.clipboard")
-                                .font(.title3)
-                            Text("从剪贴板导入")
-                                .font(.subheadline)
-                            Spacer()
-                        }
-                        .foregroundColor(.primary)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(.controlBackgroundColor))
+                    VStack(spacing: 4) {
+                        SidebarMenuItem(
+                            icon: "folder",
+                            title: "所有文档",
+                            action: {}
+                        )
+                        
+                        SidebarMenuItem(
+                            icon: "folder.badge.plus",
+                            title: "导入文件",
+                            action: { showingImportSheet = true }
+                        )
+                        
+                        SidebarMenuItem(
+                            icon: "doc.on.clipboard",
+                            title: "从剪贴板导入",
+                            action: { importFromClipboard() }
                         )
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 20)
-            
-            Divider()
-            
-            // 导航区域
-            VStack(alignment: .leading, spacing: 8) {
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "doc.text")
-                            .font(.title3)
-                        Text("所有文档")
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                }
-                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(NSColor.controlBackgroundColor))
+                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                )
+                .padding(.horizontal, 16)
                 
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "heart")
-                            .font(.title3)
-                        Text("收藏夹")
+                // Starred 分组
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Starred")
                             .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
                         Spacer()
                     }
-                    .foregroundColor(.primary)
                     .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
+                    
+                    VStack(spacing: 4) {
+                        SidebarMenuItem(
+                            icon: "star",
+                            title: "收藏夹",
+                            action: {}
+                        )
+                        
+                        SidebarMenuItem(
+                            icon: "clock",
+                            title: "最近使用",
+                            action: {}
+                        )
+                    }
                 }
-                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(NSColor.controlBackgroundColor))
+                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                )
+                .padding(.horizontal, 16)
                 
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "clock")
-                            .font(.title3)
-                        Text("最近使用")
+                // Tags 分组
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Tags")
                             .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
                         Spacer()
                     }
-                    .foregroundColor(.primary)
                     .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-            .padding(.vertical, 16)
-            
-            Spacer()
-            
-            Divider()
-            
-            // 设置区域
-            VStack(spacing: 8) {
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "gearshape")
-                            .font(.title3)
-                        Text("设置")
-                            .font(.subheadline)
-                        Spacer()
+                    
+                    VStack(spacing: 4) {
+                        SidebarMenuItem(
+                            icon: "tag",
+                            title: "标签管理",
+                            action: {}
+                        )
+                        
+                        SidebarMenuItem(
+                            icon: "number",
+                            title: "未分类",
+                            action: {}
+                        )
                     }
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
                 }
-                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(NSColor.controlBackgroundColor))
+                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                )
+                .padding(.horizontal, 16)
+                
+                Spacer(minLength: 20)
+                
+                // 设置区域
+                VStack(spacing: 4) {
+                    SidebarMenuItem(
+                        icon: "gearshape",
+                        title: "设置",
+                        action: {}
+                    )
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(NSColor.controlBackgroundColor))
+                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                )
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20)
             }
-            .padding(.vertical, 16)
         }
         .background(Color(.controlBackgroundColor))
+        .sheet(isPresented: $showingNewDocumentSheet) {
+            NewDocumentSheetView(documentViewModel: documentViewModel)
+        }
+        .sheet(isPresented: $showingImportSheet) {
+            ImportDocumentSheetView(documentViewModel: documentViewModel)
+        }
     }
     
     private func importFromClipboard() {
-        // TODO: 实现剪贴板导入逻辑
-        print("从剪贴板导入功能待实现")
+        documentViewModel.importFromClipboard()
     }
 }
 
-// MARK: - 文档列表
-struct DocumentListView: View {
+// MARK: - 侧边栏菜单项
+struct SidebarMenuItem: View {
+    let icon: String
+    let title: String
+    let action: () -> Void
+    @State private var isHovered = false
+    
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(isHovered ? .accentColor : .secondary)
+                    .frame(width: 20)
+                
+                Text(title)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(isHovered ? .primary : .secondary)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isHovered ? Color.accentColor.opacity(0.1) : Color.clear)
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onHover { hovering in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isHovered = hovering
+            }
+        }
+    }
+}
+
+// MARK: - 瀑布式文档视图
+struct DocumentWaterfallView: View {
     let documents: [Document]
     @Binding var selectedDocument: Document?
     @Binding var searchText: String
     let documentViewModel: DocumentViewModel
     
+    private let columns = [
+        GridItem(.adaptive(minimum: 280, maximum: 350), spacing: 20)
+    ]
+    
     var body: some View {
         VStack(spacing: 0) {
-            // 搜索栏
+            // 顶部搜索栏
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                 TextField("搜索文档...", text: $searchText)
-                    .textFieldStyle(PlainTextFieldStyle())
-                if !searchText.isEmpty {
-                    Button(action: {
-                        searchText = ""
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Spacer()
+                
+                // 视图切换按钮
+                HStack(spacing: 8) {
+                    Button(action: {}) {
+                        Image(systemName: "square.grid.2x2")
+                            .foregroundColor(.primary)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Button(action: {}) {
+                        Image(systemName: "list.bullet")
                             .foregroundColor(.secondary)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(.controlBackgroundColor))
-            )
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
+            .padding()
             
-            Divider()
-            
-            // 文档列表
+            // 文档卡片网格
             if documents.isEmpty {
                 EmptyStateView()
             } else {
-                List(documents, id: \.id, selection: $selectedDocument) { document in
-                    DocumentRowView(document: document, documentViewModel: documentViewModel)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-                        .listRowSeparator(.hidden)
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(documents, id: \.id) { document in
+                            DocumentCardView(
+                                document: document,
+                                documentViewModel: documentViewModel,
+                                selectedDocument: $selectedDocument
+                            )
+                        }
+                    }
+                    .padding()
                 }
-                .listStyle(PlainListStyle())
             }
         }
-        .navigationTitle("文档")
+        .navigationTitle("所有文档")
     }
 }
 
-// MARK: - 文档行视图
-struct DocumentRowView: View {
+// MARK: - 文档卡片视图
+struct DocumentCardView: View {
     let document: Document
     let documentViewModel: DocumentViewModel
+    @Binding var selectedDocument: Document?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
+            // 卡片头部
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text((document.title?.isEmpty ?? true) ? "无标题" : (document.title ?? ""))
+                    Text(document.title ?? "无标题")
                         .font(.headline)
-                        .lineLimit(1)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
                     
-                    if !(document.content?.isEmpty ?? true) {
-                        Text(document.content ?? "")
+                    if let updatedAt = document.updatedAt {
+                        Text(updatedAt, style: .relative)
                             .font(.caption)
                             .foregroundColor(.secondary)
-                            .lineLimit(2)
-                    }
-                    
-                    HStack {
-                        Text(document.updatedAt ?? Date(), style: .relative)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                        
-                        Spacer()
-                        
-                        if document.isFavorite {
-                            Image(systemName: "heart.fill")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                        }
-                        
-                        Text(document.mode == "jupyter" ? "Jupyter" : "普通")
-                            .font(.caption2)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(document.mode == "jupyter" ? Color.orange.opacity(0.2) : Color.blue.opacity(0.2))
-                            )
-                            .foregroundColor(document.mode == "jupyter" ? .orange : .blue)
                     }
                 }
                 
                 Spacer()
                 
+                // 收藏按钮
                 Button(action: {
-                    toggleFavorite()
+                    documentViewModel.toggleFavorite(document)
                 }) {
                     Image(systemName: document.isFavorite ? "heart.fill" : "heart")
-                        .font(.title3)
                         .foregroundColor(document.isFavorite ? .red : .secondary)
+                        .font(.system(size: 16))
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            
+            // 文档内容预览
+            if let content = document.content, !content.isEmpty {
+                Text(content)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .lineLimit(6)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                Text("空文档")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .italic()
+            }
+            
+            Spacer()
+            
+            // 卡片底部
+            HStack {
+                // 模式指示器
+                HStack(spacing: 4) {
+                    Image(systemName: document.mode == "markdown" ? "doc.text" : "doc.richtext")
+                        .font(.caption)
+                    Text(document.mode == "markdown" ? "Markdown" : "富文本")
+                        .font(.caption)
+                }
+                .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                // 删除按钮
+                Button(action: {
+                    documentViewModel.deleteDocument(document)
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .font(.system(size: 14))
                 }
                 .buttonStyle(PlainButtonStyle())
             }
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 12)
+        .padding(16)
+        .frame(minHeight: 180, maxHeight: 300)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color(.controlBackgroundColor))
         )
-        .contextMenu {
-            Button(action: {
-                toggleFavorite()
-            }) {
-                Label(document.isFavorite ? "取消收藏" : "添加到收藏", systemImage: document.isFavorite ? "heart.slash" : "heart")
-            }
-            
-            Button(action: {
-                deleteDocument()
-            }) {
-                Label("删除", systemImage: "trash")
-            }
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color(.separatorColor), lineWidth: 0.5)
+        )
+        .onTapGesture {
+            selectedDocument = document
         }
-    }
-    
-    private func toggleFavorite() {
-        documentViewModel.toggleFavorite(document)
-    }
-    
-    private func deleteDocument() {
-        documentViewModel.deleteDocument(document)
     }
 }
 

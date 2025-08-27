@@ -1,9 +1,0 @@
-"/Users/xinference/github/scribe/Scribe/ContentView.swift":
-  objc-header: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-Swift.h"
-  abi-baseline-json: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe.abi.json"
-  const-values: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.swiftconstvalues"
-  swiftdoc: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe.swiftdoc"
-  diagnostics: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.dia"
-  swiftsourceinfo: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe.swiftsourceinfo"
-  swiftmodule: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe.swiftmodule"
-  dependencies: "/Users/xinference/github/scribe/build/Scribe.build/Release/Scribe.build/Objects-normal/arm64/Scribe-master.d"
