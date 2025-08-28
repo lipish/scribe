@@ -105,7 +105,7 @@ struct DocumentExportView: View {
     private var documentInfoSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Image(systemName: document.mode == "jupyter" ? "terminal.fill" : "doc.text.fill")
+                Image(systemName: "doc.text.fill")
                     .foregroundColor(.accentColor)
                     .font(.title2)
                 
@@ -114,7 +114,7 @@ struct DocumentExportView: View {
                         .font(.headline)
                         .lineLimit(1)
                     
-                    Text(document.mode == "jupyter" ? "Jupyter 模式" : "普通模式")
+                    Text("普通文档")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -128,20 +128,7 @@ struct DocumentExportView: View {
                     .foregroundColor(.secondary)
             }
             
-            // 内容预览
-            if let content = document.content, !content.isEmpty {
-                Text("内容预览")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                
-                Text(content.prefix(200) + (content.count > 200 ? "..." : ""))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(12)
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
-                    .lineLimit(4)
-            }
+
         }
         .padding()
         .background(Color(NSColor.windowBackgroundColor))

@@ -13,7 +13,9 @@ import CoreData
 struct RichTextEditor: NSViewRepresentable {
     @Binding var text: String
     @Binding var isEditing: Bool
-    var font: NSFont = NSFont.systemFont(ofSize: 16)
+    @Binding var textView: NSTextView?
+    
+    var font: NSFont = NSFont.systemFont(ofSize: 14)
     var textColor: NSColor = NSColor.textColor
     var backgroundColor: NSColor = NSColor.textBackgroundColor
     
@@ -21,43 +23,26 @@ struct RichTextEditor: NSViewRepresentable {
         let scrollView = NSScrollView()
         let textView = NSTextView()
         
-        // 配置滚动视图
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false
-        scrollView.autohidesScrollers = true
-        scrollView.borderType = .noBorder
-        scrollView.documentView = textView
-        
-        // 配置文本视图
+        textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isSelectable = true
         textView.allowsUndo = true
-        textView.isRichText = true
-        textView.importsGraphics = true
-        textView.isAutomaticQuoteSubstitutionEnabled = true
-        textView.isAutomaticDashSubstitutionEnabled = true
-        textView.isAutomaticTextReplacementEnabled = true
-        textView.isAutomaticSpellingCorrectionEnabled = true
-        textView.isContinuousSpellCheckingEnabled = true
-        textView.isGrammarCheckingEnabled = true
-        textView.smartInsertDeleteEnabled = true
-        textView.isAutomaticLinkDetectionEnabled = true
-        
-        // 设置字体和颜色
         textView.font = font
         textView.textColor = textColor
         textView.backgroundColor = backgroundColor
+        textView.isAutomaticQuoteSubstitutionEnabled = false
+        textView.isAutomaticDashSubstitutionEnabled = false
+        textView.isAutomaticTextReplacementEnabled = false
         
-        // 设置文本容器
-        textView.textContainer?.containerSize = CGSize(width: scrollView.contentSize.width, height: CGFloat.greatestFiniteMagnitude)
-        textView.textContainer?.widthTracksTextView = true
-        textView.textContainer?.heightTracksTextView = false
+        scrollView.documentView = textView
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false
+        scrollView.autohidesScrollers = true
         
-        // 设置代理
-        textView.delegate = context.coordinator
-        
-        // 设置初始文本
-        textView.string = text
+        // 将textView引用传递给父视图
+        DispatchQueue.main.async {
+            self.textView = textView
+        }
         
         return scrollView
     }
@@ -65,18 +50,27 @@ struct RichTextEditor: NSViewRepresentable {
     func updateNSView(_ nsView: NSScrollView, context: Context) {
         guard let textView = nsView.documentView as? NSTextView else { return }
         
-        // 更新文本（如果需要）
         if textView.string != text {
+            // 如果文本内容不同，更新文本
+            // 这里可以检查是否有富文本格式需要加载
             textView.string = text
+            
+            // 应用默认格式
+            let range = NSRange(location: 0, length: textView.string.count)
+            textView.textStorage?.addAttribute(.font, value: font, range: range)
+            textView.textStorage?.addAttribute(.foregroundColor, value: textColor, range: range)
         }
         
-        // 更新编辑状态
-        textView.isEditable = isEditing
-        
-        // 更新外观
         textView.font = font
         textView.textColor = textColor
         textView.backgroundColor = backgroundColor
+        
+        // 确保textView引用是最新的
+        if self.textView != textView {
+            DispatchQueue.main.async {
+                self.textView = textView
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -94,7 +88,12 @@ struct RichTextEditor: NSViewRepresentable {
             guard let textView = notification.object as? NSTextView else { return }
             
             DispatchQueue.main.async {
+                // 保存纯文本内容用于兼容性
                 self.parent.text = textView.string
+                
+                // 如果需要保存富文本格式，可以使用以下代码：
+                // let rtfData = textView.textStorage?.rtf(from: NSRange(location: 0, length: textView.textStorage?.length ?? 0), documentAttributes: [:])
+                // 这里可以添加保存富文本格式的逻辑
             }
         }
         
@@ -114,7 +113,7 @@ struct RichTextEditor: NSViewRepresentable {
 
 // MARK: - 富文本工具栏
 struct RichTextToolbar: View {
-    @Binding var selectedTextView: NSTextView?
+    @Binding var textView: NSTextView?
     @State private var isBold = false
     @State private var isItalic = false
     @State private var isUnderlined = false
@@ -253,7 +252,7 @@ struct RichTextToolbar: View {
     // MARK: - 工具栏操作
     
     private func toggleBold() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let range = textView.selectedRange()
         let currentAttributes = textView.typingAttributes
@@ -272,7 +271,7 @@ struct RichTextToolbar: View {
     }
     
     private func toggleItalic() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let range = textView.selectedRange()
         let currentAttributes = textView.typingAttributes
@@ -291,7 +290,7 @@ struct RichTextToolbar: View {
     }
     
     private func toggleUnderline() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let range = textView.selectedRange()
         let currentAttributes = textView.typingAttributes
@@ -304,7 +303,7 @@ struct RichTextToolbar: View {
     }
     
     private func changeFontSize() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let range = textView.selectedRange()
         let currentAttributes = textView.typingAttributes
@@ -317,7 +316,7 @@ struct RichTextToolbar: View {
     }
     
     private func setAlignment(_ alignment: NSTextAlignment) {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let range = textView.selectedRange()
         let paragraphStyle = NSMutableParagraphStyle()
@@ -330,45 +329,45 @@ struct RichTextToolbar: View {
     }
     
     private func insertBulletList() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let bulletText = "• "
         textView.replaceCharacters(in: textView.selectedRange(), with: bulletText)
     }
     
     private func insertNumberedList() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let numberedText = "1. "
         textView.replaceCharacters(in: textView.selectedRange(), with: numberedText)
     }
     
     private func insertLink() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let linkText = "[链接文本](https://example.com)"
         textView.replaceCharacters(in: textView.selectedRange(), with: linkText)
     }
     
     private func insertCodeBlock() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         
         let codeText = "```\n代码\n```"
         textView.replaceCharacters(in: textView.selectedRange(), with: codeText)
     }
     
     private func undo() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         textView.undoManager?.undo()
     }
     
     private func redo() {
-        guard let textView = selectedTextView else { return }
+        guard let textView = textView else { return }
         textView.undoManager?.redo()
     }
     
     private func updateToolbarState(for textView: NSTextView) {
-        selectedTextView = textView
+        self.textView = textView
         
         let attributes = textView.typingAttributes
         

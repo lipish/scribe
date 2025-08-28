@@ -1,0 +1,18 @@
+"/Users/xinference/github/scribe/Scribe/Models/Persistence.swift":
+  object: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.o"
+  diagnostics: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.dia"
+  dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.d"
+  swift-dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.swiftdeps"
+  const-values: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.swiftconstvalues"
+"/Users/xinference/github/scribe/Scribe/ContentView.swift":
+  object: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.o"
+  const-values: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.swiftconstvalues"
+  swift-dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.swiftdeps"
+  dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.d"
+  diagnostics: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.dia"
+"/Users/xinference/github/scribe/Scribe/ScribeApp.swift":
+  object: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.o"
+  dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.d"
+  const-values: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.swiftconstvalues"
+  diagnostics: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.dia"
+  swift-dependencies: "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.swiftdeps"

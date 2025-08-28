@@ -1,0 +1,136 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Scribe",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "新建文档",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Folders",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 87
+        }
+      },
+      {
+        "comment": "",
+        "key": "Starred",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tags",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 161
+        }
+      },
+      {
+        "comment": "",
+        "key": "所有文档",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 309
+        }
+      },
+      {
+        "comment": "",
+        "key": "搜索文档...",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 277
+        }
+      },
+      {
+        "comment": "",
+        "key": "空文档",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 403
+        }
+      },
+      {
+        "comment": "",
+        "key": "Markdown",
+        "location": {
+          "startingColumn": 60,
+          "startingLine": 417
+        }
+      },
+      {
+        "comment": "",
+        "key": "富文本",
+        "location": {
+          "startingColumn": 73,
+          "startingLine": 417
+        }
+      },
+      {
+        "comment": "",
+        "key": "还没有文档",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 459
+        }
+      },
+      {
+        "comment": "",
+        "key": "创建您的第一个文档开始使用 Scribe",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 463
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scribe",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 508
+        }
+      },
+      {
+        "comment": "",
+        "key": "发挥",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 497
+        }
+      },
+      {
+        "comment": "",
+        "key": "欢迎使用 Scribe",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 523
+        }
+      },
+      {
+        "comment": "",
+        "key": "强大的文档编辑和管理工具",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 527
+        }
+      }
+    ]
+  },
+  "version": 1
+}

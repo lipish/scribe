@@ -128,8 +128,7 @@ struct DocumentToolbar: View {
         HStack {
             // 新建按钮
             Menu {
-                Button("普通笔记", action: onNewDocument)
-                Button("Jupyter 笔记", action: onNewDocument)
+                Button("新建文档", action: onNewDocument)
                 Divider()
                 Button("导入文档", action: onImport)
             } label: {
@@ -258,8 +257,8 @@ struct DocumentListRow: View {
             .buttonStyle(.plain)
             
             // 文档图标
-            Image(systemName: document.mode == "jupyter" ? "terminal.fill" : "doc.text.fill")
-                .foregroundColor(document.mode == "jupyter" ? .orange : .blue)
+            Image(systemName: "doc.text.fill")
+                .foregroundColor(.blue)
                 .frame(width: 20)
             
             // 文档信息
@@ -316,8 +315,8 @@ struct DocumentGridCard: View {
         VStack(alignment: .leading, spacing: 8) {
             // 头部
             HStack {
-                Image(systemName: document.mode == "jupyter" ? "terminal.fill" : "doc.text.fill")
-                    .foregroundColor(document.mode == "jupyter" ? .orange : .blue)
+                Image(systemName: "doc.text.fill")
+                    .foregroundColor(.blue)
                 
                 Spacer()
                 
@@ -383,7 +382,6 @@ struct NewDocumentSheet: View {
     @ObservedObject var documentViewModel: DocumentViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var title = ""
-    @State private var selectedMode: String = "normal"
     
     var body: some View {
         NavigationView {
@@ -391,11 +389,9 @@ struct NewDocumentSheet: View {
                 Section("文档信息") {
                     TextField("标题", text: $title)
                     
-                    Picker("模式", selection: $selectedMode) {
-                        Text("普通文档").tag("normal")
-                        Text("Jupyter 笔记").tag("jupyter")
-                    }
-                    .pickerStyle(.segmented)
+                    // 移除模式选择，只支持普通文档
+                    Text("普通文档")
+                        .foregroundColor(.secondary)
                 }
             }
             .navigationTitle("新建文档")
@@ -409,7 +405,7 @@ struct NewDocumentSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("创建") {
                         let documentTitle = title.isEmpty ? "新建文档" : title
-                        documentViewModel.createDocument(title: documentTitle, mode: selectedMode)
+                        documentViewModel.createDocument(title: documentTitle)
                         dismiss()
                     }
                 }

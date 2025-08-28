@@ -21,25 +21,7 @@ extension Document {
     @NSManaged public var mode: String?
     @NSManaged public var title: String?
     @NSManaged public var updatedAt: Date?
-    @NSManaged public var cells: NSSet?
     @NSManaged public var tags: NSSet?
-
-}
-
-// MARK: Generated accessors for cells
-extension Document {
-
-    @objc(addCellsObject:)
-    @NSManaged public func addToCells(_ value: Cell)
-
-    @objc(removeCellsObject:)
-    @NSManaged public func removeFromCells(_ value: Cell)
-
-    @objc(addCells:)
-    @NSManaged public func addToCells(_ values: NSSet)
-
-    @objc(removeCells:)
-    @NSManaged public func removeFromCells(_ values: NSSet)
 
 }
 

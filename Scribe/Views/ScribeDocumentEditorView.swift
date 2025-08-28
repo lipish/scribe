@@ -33,19 +33,11 @@ struct ScribeDocumentEditorView: View {
             Divider()
             
             // 编辑器内容
-            if document.mode == "jupyter" {
-                ScribeJupyterEditorView(
-                    document: document,
-                    editableContent: $editableContent,
-                    documentViewModel: documentViewModel
-                )
-            } else {
-                ScribeNormalEditorView(
-                    document: document,
-                    editableContent: $editableContent,
-                    documentViewModel: documentViewModel
-                )
-            }
+            ScribeNormalEditorView(
+                document: document,
+                editableContent: $editableContent,
+                documentViewModel: documentViewModel
+            )
         }
         .onAppear {
             editableTitle = document.title ?? ""
@@ -115,108 +107,33 @@ struct ScribeNormalEditorView: View {
     let document: Document
     @Binding var editableContent: String
     @ObservedObject var documentViewModel: DocumentViewModel
-    @State private var showingPreview = false
+    @State private var isEditing = true
+    @State private var textView: NSTextView?
     
     var body: some View {
-        HSplitView {
-            // 编辑器
-            VStack {
-                HStack {
-                    Text("编辑")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Button {
-                        showingPreview.toggle()
-                    } label: {
-                        Image(systemName: showingPreview ? "eye.slash" : "eye")
-                    }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal)
-                .padding(.top)
-                
-                Divider()
-                
-                TextEditor(text: $editableContent)
-                    .font(.system(.body, design: .monospaced))
-                    .padding()
-                    .onChange(of: editableContent) { newValue in
-                        documentViewModel.updateDocumentContent(document, title: document.title ?? "", content: newValue)
-                    }
-            }
+        VStack(spacing: 0) {
+            // 富文本工具栏
+            RichTextToolbar(textView: $textView)
             
-            // 预览（如果启用）
-            if showingPreview {
-                VStack {
-                    HStack {
-                        Text("预览")
-                            .font(.headline)
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
-                    
-                    Divider()
-                    
-                    ScrollView {
-                        Text(editableContent.isEmpty ? "开始编写您的笔记..." : editableContent)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                    }
-                }
+            Divider()
+            
+            // 富文本编辑器
+            RichTextEditor(
+                text: $editableContent,
+                isEditing: $isEditing,
+                textView: $textView,
+                font: NSFont.systemFont(ofSize: 16),
+                textColor: NSColor.textColor,
+                backgroundColor: NSColor.textBackgroundColor
+            )
+            .onChange(of: editableContent) { newValue in
+                documentViewModel.updateDocumentContent(document, title: document.title ?? "", content: newValue)
             }
         }
     }
 }
 
-struct ScribeJupyterEditorView: View {
-    let document: Document
-    @Binding var editableContent: String
-    @ObservedObject var documentViewModel: DocumentViewModel
-    @State private var showingAIAssistant = false
-    
-    var body: some View {
-        HSplitView {
-            // 主编辑器
-            VStack {
-                HStack {
-                    Text("Jupyter 编辑器")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Button {
-                        showingAIAssistant.toggle()
-                    } label: {
-                        Image(systemName: "brain.head.profile")
-                    }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal)
-                .padding(.top)
-                
-                TextEditor(text: $editableContent)
-                    .font(.system(.body, design: .monospaced))
-                    .padding()
-                    .onChange(of: editableContent) { newValue in
-                        documentViewModel.updateDocumentContent(document, title: document.title ?? "", content: newValue)
-                    }
-            }
-            
-            // AI 助手面板
-            if showingAIAssistant {
-                ScribeAIAssistantPanel(
-                    document: document,
-                    editableContent: $editableContent,
-                    documentViewModel: documentViewModel
-                )
-                .frame(minWidth: 300, maxWidth: 400)
-            }
-        }
-    }
-}
+
 
 struct ScribeAIAssistantPanel: View {
     let document: Document
@@ -285,7 +202,7 @@ struct ScribeDocumentInfoSheet: View {
             Form {
                 Section("基本信息") {
                     LabeledContent("标题", value: document.title ?? "未命名")
-                    LabeledContent("类型", value: document.mode == "jupyter" ? "Jupyter" : "Normal")
+                    LabeledContent("类型", value: "普通文档")
                     LabeledContent("收藏", value: document.isFavorite ? "是" : "否")
                 }
                 
@@ -355,6 +272,8 @@ struct ScribeDocumentExportView: View {
         }
     }
 }
+
+// Markdown相关代码已移除，现在使用RichTextEditor和RichTextToolbar
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext

@@ -34,7 +34,13 @@ class DocumentViewModel: ObservableObject {
     
     init(context: NSManagedObjectContext? = nil) {
         self.viewContext = context
-        loadDocuments()
+        if context != nil {
+            loadDocuments()
+        }
+    }
+    
+    func setViewContext(_ context: NSManagedObjectContext) {
+        self.viewContext = context
     }
     
     func loadDocuments() {
@@ -51,15 +57,14 @@ class DocumentViewModel: ObservableObject {
         }
     }
     
-    func createDocument(mode: String = "normal") {
+    func createDocument() {
         guard let context = viewContext else { return }
         
-        let title = mode == "jupyter" ? "新建 Jupyter 笔记" : "新建文档"
         let newDocument = Document(context: context)
         newDocument.id = UUID()
-        newDocument.title = title
+        newDocument.title = "新建文档"
         newDocument.content = ""
-        newDocument.mode = mode
+        newDocument.mode = "normal"
         newDocument.createdAt = Date()
         newDocument.updatedAt = Date()
         newDocument.isFavorite = false
@@ -73,18 +78,14 @@ class DocumentViewModel: ObservableObject {
         }
     }
     
-    func createDocument() {
-        createDocument(mode: "normal")
-    }
-    
-    func createDocument(title: String, mode: String) {
+    func createDocument(title: String) {
         guard let context = viewContext else { return }
         
         let newDocument = Document(context: context)
         newDocument.id = UUID()
         newDocument.title = title
         newDocument.content = ""
-        newDocument.mode = mode
+        newDocument.mode = "normal"
         newDocument.createdAt = Date()
         newDocument.updatedAt = Date()
         newDocument.isFavorite = false
@@ -128,13 +129,12 @@ class DocumentViewModel: ObservableObject {
         do {
             let content = try String(contentsOf: url)
             let title = url.deletingPathExtension().lastPathComponent
-            let mode = url.pathExtension.lowercased() == "ipynb" ? "jupyter" : "normal"
             
             let newDocument = Document(context: context)
             newDocument.id = UUID()
             newDocument.title = title
             newDocument.content = content
-            newDocument.mode = mode
+            newDocument.mode = "normal"
             newDocument.createdAt = Date()
             newDocument.updatedAt = Date()
             newDocument.isFavorite = false
@@ -194,134 +194,7 @@ class DocumentViewModel: ObservableObject {
         selectedDocument = document
     }
     
-    // MARK: - Cell Management
-    
-    func moveCellUp(_ cell: Cell) {
-        guard let document = cell.document else { return }
-        let cells = document.cells?.allObjects as? [Cell] ?? []
-        let sortedCells = cells.sorted { $0.orderIndex < $1.orderIndex }
-        
-        if let currentIndex = sortedCells.firstIndex(of: cell), currentIndex > 0 {
-            let previousCell = sortedCells[currentIndex - 1]
-            let tempIndex = cell.orderIndex
-            cell.orderIndex = previousCell.orderIndex
-            previousCell.orderIndex = tempIndex
-            saveContext()
-        }
-    }
-    
-    func moveCellDown(_ cell: Cell) {
-        guard let document = cell.document else { return }
-        let cells = document.cells?.allObjects as? [Cell] ?? []
-        let sortedCells = cells.sorted { $0.orderIndex < $1.orderIndex }
-        
-        if let currentIndex = sortedCells.firstIndex(of: cell), currentIndex < sortedCells.count - 1 {
-            let nextCell = sortedCells[currentIndex + 1]
-            let tempIndex = cell.orderIndex
-            cell.orderIndex = nextCell.orderIndex
-            nextCell.orderIndex = tempIndex
-            saveContext()
-        }
-    }
-    
-    func duplicateCell(_ cell: Cell) {
-        guard let context = viewContext else { return }
-        
-        let newCell = Cell(context: context)
-        newCell.id = UUID()
-        newCell.cellType = cell.cellType
-        newCell.input = cell.input
-        newCell.output = cell.output
-        newCell.orderIndex = cell.orderIndex + 1
-        newCell.createdAt = Date()
-        newCell.updatedAt = Date()
-        newCell.document = cell.document
-        
-        // Update order indices for cells below
-        if let document = cell.document {
-            let cells = document.cells?.allObjects as? [Cell] ?? []
-            for existingCell in cells {
-                if existingCell.orderIndex > cell.orderIndex {
-                    existingCell.orderIndex += 1
-                }
-            }
-        }
-        
-        saveContext()
-    }
-    
-    func deleteCell(_ cell: Cell) {
-        guard let context = viewContext else { return }
-        
-        let orderIndex = cell.orderIndex
-        let document = cell.document
-        
-        context.delete(cell)
-        
-        // Update order indices for cells below
-        if let document = document {
-            let cells = document.cells?.allObjects as? [Cell] ?? []
-            for existingCell in cells {
-                if existingCell.orderIndex > orderIndex {
-                    existingCell.orderIndex -= 1
-                }
-            }
-        }
-        
-        saveContext()
-    }
-    
-    func insertCellAbove(_ cell: Cell) {
-        guard let context = viewContext else { return }
-        
-        let newCell = Cell(context: context)
-        newCell.id = UUID()
-        newCell.cellType = "code"
-        newCell.input = ""
-        newCell.output = ""
-        newCell.orderIndex = cell.orderIndex
-        newCell.createdAt = Date()
-        newCell.updatedAt = Date()
-        newCell.document = cell.document
-        
-        // Update order indices for this cell and cells below
-        if let document = cell.document {
-            let cells = document.cells?.allObjects as? [Cell] ?? []
-            for existingCell in cells {
-                if existingCell.orderIndex >= cell.orderIndex {
-                    existingCell.orderIndex += 1
-                }
-            }
-        }
-        
-        saveContext()
-    }
-    
-    func insertCellBelow(_ cell: Cell) {
-        guard let context = viewContext else { return }
-        
-        let newCell = Cell(context: context)
-        newCell.id = UUID()
-        newCell.cellType = "code"
-        newCell.input = ""
-        newCell.output = ""
-        newCell.orderIndex = cell.orderIndex + 1
-        newCell.createdAt = Date()
-        newCell.updatedAt = Date()
-        newCell.document = cell.document
-        
-        // Update order indices for cells below
-        if let document = cell.document {
-            let cells = document.cells?.allObjects as? [Cell] ?? []
-            for existingCell in cells {
-                if existingCell.orderIndex > cell.orderIndex {
-                    existingCell.orderIndex += 1
-                }
-            }
-        }
-        
-        saveContext()
-    }
+
     
     func saveContext() {
         guard let context = viewContext else { return }
@@ -348,12 +221,30 @@ class DocumentViewModel: ObservableObject {
         }
     }
     
-    func updateDocumentWithDetails(_ document: Document, title: String, content: String, mode: String) {
+    // 支持富文本格式保存的方法
+    func updateDocumentWithRichText(_ document: Document, title: String, content: String, rtfData: Data? = nil) {
         guard let context = viewContext else { return }
         
         document.title = title
         document.content = content
-        document.mode = mode
+        // 如果有RTF数据，可以保存到额外的字段中
+        // document.richTextData = rtfData
+        document.updatedAt = Date()
+        
+        do {
+            try context.save()
+            loadDocuments()
+        } catch {
+            print("更新富文档失败: \(error)")
+        }
+    }
+    
+    func updateDocumentWithDetails(_ document: Document, title: String, content: String) {
+        guard let context = viewContext else { return }
+        
+        document.title = title
+        document.content = content
+        document.mode = "normal"
         document.updatedAt = Date()
         
         do {

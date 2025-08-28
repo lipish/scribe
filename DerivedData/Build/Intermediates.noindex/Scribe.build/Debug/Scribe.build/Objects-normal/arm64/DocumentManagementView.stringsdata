@@ -1,0 +1,192 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/Views/DocumentManagementView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "删除文档",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "取消",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 101
+        }
+      },
+      {
+        "comment": "",
+        "key": "删除",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 102
+        }
+      },
+      {
+        "comment": "",
+        "key": "确定要删除选中的 %lld 个文档吗？此操作无法撤销。",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 106
+        }
+      },
+      {
+        "comment": "",
+        "key": "已选中 %lld 个文档",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 143
+        }
+      },
+      {
+        "comment": "",
+        "key": "删除",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 147
+        }
+      },
+      {
+        "comment": "",
+        "key": "视图模式",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 167
+        }
+      },
+      {
+        "comment": "",
+        "key": "新建文档",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 131
+        }
+      },
+      {
+        "comment": "",
+        "key": "导入文档",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 133
+        }
+      },
+      {
+        "comment": "",
+        "key": "新建",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 135
+        }
+      },
+      {
+        "comment": "",
+        "key": "排序",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "新建文档",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 397
+        }
+      },
+      {
+        "comment": "",
+        "key": "文档信息",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 389
+        }
+      },
+      {
+        "comment": "",
+        "key": "普通文档",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 393
+        }
+      },
+      {
+        "comment": "",
+        "key": "标题",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 390
+        }
+      },
+      {
+        "comment": "",
+        "key": "取消",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 400
+        }
+      },
+      {
+        "comment": "",
+        "key": "创建",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 406
+        }
+      },
+      {
+        "comment": "",
+        "key": "导入文档",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 452
+        }
+      },
+      {
+        "comment": "",
+        "key": "导入文档",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 429
+        }
+      },
+      {
+        "comment": "",
+        "key": "支持导入 Markdown、文本文件等格式",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 433
+        }
+      },
+      {
+        "comment": "",
+        "key": "选择文件",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 438
+        }
+      },
+      {
+        "comment": "",
+        "key": "从剪贴板导入",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 443
+        }
+      },
+      {
+        "comment": "",
+        "key": "取消",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 456
+        }
+      }
+    ]
+  },
+  "version": 1
+}

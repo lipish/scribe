@@ -1,0 +1,208 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/Views/ScribeDocumentEditorView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "文档标题",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "隐藏预览",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "显示预览",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "预览",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "AI 助手",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 182
+        }
+      },
+      {
+        "comment": "",
+        "key": "输入您的问题或需求...",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 187
+        }
+      },
+      {
+        "comment": "",
+        "key": "生成内容",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "正在生成...",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 198
+        }
+      },
+      {
+        "comment": "",
+        "key": "完成",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 206
+        }
+      },
+      {
+        "comment": "",
+        "key": "文档信息",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "基本信息",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 237
+        }
+      },
+      {
+        "comment": "",
+        "key": "时间信息",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 243
+        }
+      },
+      {
+        "comment": "",
+        "key": "统计信息",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 248
+        }
+      },
+      {
+        "comment": "",
+        "key": "标题",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 238
+        }
+      },
+      {
+        "comment": "",
+        "key": "类型",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 239
+        }
+      },
+      {
+        "comment": "",
+        "key": "收藏",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "创建时间",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 244
+        }
+      },
+      {
+        "comment": "",
+        "key": "修改时间",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 245
+        }
+      },
+      {
+        "comment": "",
+        "key": "字符数",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 249
+        }
+      },
+      {
+        "comment": "",
+        "key": "行数",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 250
+        }
+      },
+      {
+        "comment": "",
+        "key": "导出",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 294
+        }
+      },
+      {
+        "comment": "",
+        "key": "导出文档",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 267
+        }
+      },
+      {
+        "comment": "",
+        "key": "导出格式",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 272
+        }
+      },
+      {
+        "comment": "",
+        "key": "导出",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 281
+        }
+      },
+      {
+        "comment": "",
+        "key": "正在导出...",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 288
+        }
+      }
+    ]
+  },
+  "version": 1
+}

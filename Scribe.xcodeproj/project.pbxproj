@@ -19,9 +19,9 @@
 
 		A1000012 /* DocumentManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000011 /* DocumentManagementView.swift */; };
 		A1000014 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000013 /* RichTextEditor.swift */; };
-		A1000016 /* JupyterCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000015 /* JupyterCellView.swift */; };
+
 		A1000018 /* DocumentExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000017 /* DocumentExportView.swift */; };
-		A1000056 /* MarkdownPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000055 /* MarkdownPreviewView.swift */; };
+
 		A100001A /* AISettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000019 /* AISettingsView.swift */; };
 		A1000052 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000051 /* SettingsView.swift */; };
 		A100001C /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001B /* AIService.swift */; };
@@ -46,9 +46,9 @@
 
 		A1000011 /* DocumentManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManagementView.swift; sourceTree = "<group>"; };
 		A1000013 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
-		A1000015 /* JupyterCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JupyterCellView.swift; sourceTree = "<group>"; };
+
 		A1000017 /* DocumentExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentExportView.swift; sourceTree = "<group>"; };
-		A1000055 /* MarkdownPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreviewView.swift; sourceTree = "<group>"; };
+
 		A1000019 /* AISettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISettingsView.swift; sourceTree = "<group>"; };
 		A1000051 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A100001B /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
@@ -116,9 +116,9 @@
 
 				A1000011 /* DocumentManagementView.swift */,
 				A1000013 /* RichTextEditor.swift */,
-				A1000015 /* JupyterCellView.swift */,
+
 				A1000017 /* DocumentExportView.swift */,
-				A1000055 /* MarkdownPreviewView.swift */,
+
 				A1000058 /* NewDocumentSheetView.swift */,
 				A100005A /* ImportDocumentSheetView.swift */,
 				A100005C /* ScribeDocumentEditorView.swift */,
@@ -239,9 +239,9 @@
 				A100000A /* Persistence.swift in Sources */,
 				A1000012 /* DocumentManagementView.swift in Sources */,
 				A1000014 /* RichTextEditor.swift in Sources */,
-				A1000016 /* JupyterCellView.swift in Sources */,
+
 				A1000018 /* DocumentExportView.swift in Sources */,
-				A1000056 /* MarkdownPreviewView.swift in Sources */,
+
 				A100001A /* AISettingsView.swift in Sources */,
 				A1000052 /* SettingsView.swift in Sources */,
 				A100001C /* AIService.swift in Sources */,

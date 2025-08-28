@@ -14,12 +14,6 @@ struct NewDocumentSheetView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var title = ""
-    @State private var selectedMode: DocumentMode = .normal
-    
-    enum DocumentMode: String, CaseIterable {
-        case normal = "普通文档"
-        case jupyter = "Jupyter 笔记"
-    }
     
     var body: some View {
         ZStack {
@@ -70,65 +64,6 @@ struct NewDocumentSheetView: View {
                                         .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                 )
                                 .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-                        }
-                        
-                        // 模式选择
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("文档模式")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.secondary)
-                            
-                            HStack(spacing: 12) {
-                                // 普通文档按钮
-                                Button(action: {
-                                    selectedMode = .normal
-                                }) {
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "doc.text")
-                                            .font(.system(size: 16, weight: .medium))
-                                        Text("普通文档")
-                                            .font(.system(size: 14, weight: .medium))
-                                    }
-                                    .foregroundColor(selectedMode == .normal ? .white : .primary)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(selectedMode == .normal ? Color.accentColor : Color.white)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(selectedMode == .normal ? Color.accentColor : Color.gray.opacity(0.3), lineWidth: 1)
-                                            )
-                                    )
-                                    .shadow(color: .black.opacity(selectedMode == .normal ? 0.1 : 0.05), radius: 2, x: 0, y: 1)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                
-                                // Jupyter笔记按钮
-                                Button(action: {
-                                    selectedMode = .jupyter
-                                }) {
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "book")
-                                            .font(.system(size: 16, weight: .medium))
-                                        Text("Jupyter 笔记")
-                                            .font(.system(size: 14, weight: .medium))
-                                    }
-                                    .foregroundColor(selectedMode == .jupyter ? .white : .primary)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(selectedMode == .jupyter ? Color.orange : Color.white)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(selectedMode == .jupyter ? Color.orange : Color.gray.opacity(0.3), lineWidth: 1)
-                                            )
-                                    )
-                                    .shadow(color: .black.opacity(selectedMode == .jupyter ? 0.1 : 0.05), radius: 2, x: 0, y: 1)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
                         }
                     }
                     .padding(.horizontal, 40)
@@ -184,25 +119,13 @@ struct NewDocumentSheetView: View {
                 Spacer()
             }
         }
-        .frame(width: 480, height: 520)
+        .frame(width: 480, height: 400)
     }
     
     private func createDocument() {
-        let newDocument = Document(context: viewContext)
-        newDocument.id = UUID()
-        newDocument.title = title.isEmpty ? "新建文档" : title
-        newDocument.content = ""
-        newDocument.mode = selectedMode == .normal ? "normal" : "jupyter"
-        newDocument.createdAt = Date()
-        newDocument.updatedAt = Date()
-        newDocument.isFavorite = false
-        
-        do {
-            try viewContext.save()
-            dismiss()
-        } catch {
-            print("创建文档失败: \(error)")
-        }
+        let documentTitle = title.isEmpty ? "新建文档" : title
+        documentViewModel.createDocument(title: documentTitle)
+        dismiss()
     }
 }
 

@@ -1,0 +1,218 @@
+{
+  "" : {
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe-master.dia",
+    "emit-module-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe-master-emit-module.dia",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe-master.swiftdeps"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Document+CoreDataClass.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataClass~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Document+CoreDataProperties.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Document+CoreDataProperties~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Scribe+CoreDataModel.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Scribe+CoreDataModel~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Tag+CoreDataClass.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataClass~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/CoreDataGenerated/Scribe/Tag+CoreDataProperties.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Tag+CoreDataProperties~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/ContentView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Models/Persistence.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/Persistence~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/ScribeApp.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeApp~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Services/AIService.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AIService~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Services/DocumentExportService.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportService~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/ViewModels/DocumentViewModel.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentViewModel~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/DocumentExportView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentExportView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/DocumentManagementView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/DocumentManagementView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/ImportDocumentSheetView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ImportDocumentSheetView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/MarkdownPreviewView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/MarkdownPreviewView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/NewDocumentSheetView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/NewDocumentSheetView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/RichTextEditor.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/RichTextEditor~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/ScribeDocumentEditorView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/ScribeDocumentEditorView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/Settings/AISettingsView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/AISettingsView~partial.swiftmodule"
+  },
+  "/Users/xinference/github/scribe/Scribe/Views/Settings/SettingsView.swift" : {
+    "const-values" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.swiftconstvalues",
+    "dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.d",
+    "diagnostics" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.dia",
+    "index-unit-output-path" : "/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.o",
+    "llvm-bc" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.bc",
+    "object" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.o",
+    "swift-dependencies" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView.swiftdeps",
+    "swiftmodule" : "/Users/xinference/github/scribe/DerivedData/Build/Intermediates.noindex/Scribe.build/Debug/Scribe.build/Objects-normal/arm64/SettingsView~partial.swiftmodule"
+  }
+}

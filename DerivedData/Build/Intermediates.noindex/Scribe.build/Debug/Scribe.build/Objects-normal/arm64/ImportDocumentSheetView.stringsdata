@@ -1,0 +1,56 @@
+{
+  "source": "/Users/xinference/github/scribe/Scribe/Views/ImportDocumentSheetView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "导入文档",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "导入文件",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "选择单个文件进行导入",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "导入目录",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 109
+        }
+      },
+      {
+        "comment": "",
+        "key": "批量导入目录中的所有文件",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 112
+        }
+      },
+      {
+        "comment": "",
+        "key": "取消",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 144
+        }
+      }
+    ]
+  },
+  "version": 1
+}
